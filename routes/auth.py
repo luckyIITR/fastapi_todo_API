@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
-route = APIRouter()
+router = APIRouter()
 
 
-@route.get('/auth/')
+@router.get('/auth/')
 def users():
     return {"user": "auth"}
