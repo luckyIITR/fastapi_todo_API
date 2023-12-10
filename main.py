@@ -7,10 +7,12 @@ from models import Todos
 from database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
+from routes import auth
 
 app = FastAPI()
 
 models.Base.metadata.create_all(bind=engine)
+app.include_router(auth.route)
 
 
 class TodoRequest(BaseModel):
