@@ -1,1 +1,5 @@
 python-jose[cryptography]
+fastapi
+uvicorn
+SQLAlchemy
+passlib
