@@ -30,7 +30,10 @@ class Token(BaseModel):
     token_type: str
 
 
-router = APIRouter()
+router = APIRouter(
+    prefix='/auth',
+    tags=['auth']
+)
 
 
 def get_db():
@@ -92,7 +95,7 @@ async def create_user(db: db_dependency,
     db.commit()
 
 
-@router.post("/token")
+@router.post("/token", response_model=Token)
 async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
                                  db: db_dependency):
     user = authenticate_user(form_data.username, form_data.password, db)
