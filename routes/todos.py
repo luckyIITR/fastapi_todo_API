@@ -10,13 +10,6 @@ from .auth import get_current_user
 router = APIRouter()
 
 
-class TodoRequest(BaseModel):
-    title: str = Field(min_length=3)
-    description: str = Field(min_length=3, max_length=100)
-    priority: int = Field(gt=0, lt=6)
-    complete: bool
-
-
 def get_db():
     db = SessionLocal()
     try:
@@ -27,6 +20,13 @@ def get_db():
 
 db_dependency = Annotated[Session, Depends(get_db)]
 user_dependency = Annotated[dict, Depends(get_current_user)]
+
+
+class TodoRequest(BaseModel):
+    title: str = Field(min_length=3)
+    description: str = Field(min_length=3, max_length=100)
+    priority: int = Field(gt=0, lt=6)
+    complete: bool
 
 
 @router.get("/", status_code=status.HTTP_200_OK)
